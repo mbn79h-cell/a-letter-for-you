@@ -1,0 +1,359 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Segoe UI", sans-serif;
+
+    background:
+        radial-gradient(circle at top, #ffe8ef, transparent 45%),
+        linear-gradient(135deg, #ffd1dc, #fff0f4);
+
+    color: #7b263a;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+
+.envelope {
+    width: 430px;
+    height: 290px;
+
+    position: relative;
+
+    perspective: 1000px;
+
+    filter: drop-shadow(
+        0 20px 25px rgba(120, 30, 60, 0.2)
+    );
+}
+
+.envelope-back {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    background: #f7a9bc;
+
+    border-radius: 8px;
+
+    z-index: 1;
+}
+
+.letter {
+    position: absolute;
+
+    width: 390px;
+    height: 250px;
+
+    left: 20px;
+    top: 20px;
+
+    background: #fffdf9;
+
+    border-radius: 5px;
+
+    z-index: 2;
+
+    transition:
+        transform 1s ease,
+        top 1s ease,
+        height 1s ease;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.12);
+
+    overflow: hidden;
+}
+
+.letter-content {
+    padding: 25px;
+
+    text-align: center;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.8s ease 0.5s;
+}
+
+.bear {
+    font-size: 50px;
+
+    margin-bottom: 5px;
+}
+
+.letter h1 {
+    font-family: Georgia, serif;
+
+    color: #c83b5b;
+
+    margin-bottom: 12px;
+}
+
+.letter p {
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    margin-bottom: 10px;
+
+    color: #6e3946;
+}
+
+.letter .love {
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #e3264f;
+
+    margin-top: 15px;
+}
+
+.signature {
+    font-family: cursive;
+}
+
+.envelope-front {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 65%;
+
+    background: #f28da7;
+
+    z-index: 4;
+
+    clip-path: polygon(
+        0 0,
+        50% 55%,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+}
+
+.flap {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 65%;
+
+    background: #f6a5b9;
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        50% 100%
+    );
+
+    transform-origin: top;
+
+    z-index: 5;
+
+    transition:
+        transform 1s ease;
+}
+
+#openBtn {
+    position: absolute;
+
+    left: 50%;
+    bottom: -75px;
+
+    transform: translateX(-50%);
+
+    border: none;
+
+    padding: 13px 30px;
+
+    border-radius: 30px;
+
+    background: #d9365b;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(180, 30, 70, 0.25);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+#openBtn:hover {
+    background: #bd294b;
+
+    transform:
+        translateX(-50%)
+        scale(1.05);
+}
+
+.hint {
+    margin-top: 120px;
+
+    color: #9a4055;
+
+    font-size: 14px;
+
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+
+    z-index: 1;
+}
+
+.envelope.open .letter {
+    top: -185px;
+
+    height: 470px;
+
+    z-index: 3;
+}
+
+.envelope.open .letter-content {
+    opacity: 1;
+}
+
+.envelope.open #openBtn {
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+.hearts {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+
+    bottom: -30px;
+
+    font-size: 20px;
+
+    animation:
+        floatHeart linear forwards;
+
+    opacity: 0.8;
+}
+
+@keyframes floatHeart {
+
+    from {
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    to {
+        transform:
+            translateY(-110vh)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .envelope {
+        width: 330px;
+        height: 225px;
+    }
+
+    .letter {
+        width: 300px;
+        height: 195px;
+
+        left: 15px;
+        top: 15px;
+    }
+
+    .letter-content {
+        padding: 18px;
+    }
+
+    .letter h1 {
+        font-size: 22px;
+    }
+
+    .letter p {
+        font-size: 12px;
+
+        line-height: 1.45;
+    }
+
+    .bear {
+        font-size: 35px;
+    }
+
+    .envelope.open .letter {
+        top: -190px;
+
+        height: 390px;
+    }
+
+    .hint {
+        font-size: 12px;
+    }
+}
